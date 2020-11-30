@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Configurations>Debug;Release;DebugT</Configurations>
+    <LangVersion>9.0</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugT|AnyCPU'">
+    <Optimize>false</Optimize>
+    <DefineConstants>TRACE;DEBUG;DEBUGT</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Dead\MazeRunner.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Dead\MazeRunner.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ImmutableLinkedList" Version="1.0.1" />
+    <PackageReference Include="morelinq" Version="3.3.2" />
+  </ItemGroup>
+
+</Project>
