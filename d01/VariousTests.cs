@@ -27,6 +27,7 @@ namespace d01
             //Dijkstra
         }
 
+        class A { public int a; }
         static void Test_CS9_Switch()
         {
             A x = new A() { a = 123 };
@@ -51,10 +52,8 @@ namespace d01
         static void TEST_Input()
         {
 
-
-            InputHelper.LoadInput(2018);
             HashSet<int> s = new HashSet<int>();
-            var tkns = InputHelper.AsTokens<int>();
+            var tkns = InputHelper.LoadInput(2018).AsTokens<int>();
             var res =
                 tkns
                 //.Where(_ => true)
