@@ -1,5 +1,9 @@
 ﻿using AOC.Common;
 using System;
+using System.Linq;
+using MoreLinq;
+using static System.Environment;
+using static AOC.Common.SmartConversions;
 
 namespace d00
 {
@@ -7,14 +11,15 @@ namespace d00
     {
         static void Main(string[] args)
         {
-            var tkns = InputHelper.LoadInput(2020).AsTokens<int>();
+            var lns = InputHelper.LoadInput(2020).AsLines();
+            //var txt = InputHelper.LoadInput(2020).AsText();
+            //var tkns = InputHelper.LoadInput(2020).AsTokens<int>();
 
-            //int num = tkns.Count;
-            //var res1 =
-            //    tkns
-            //    //.Select(x => x)
-            //    .FFold((x, y) => x + y, 0)
-            //    ;
+
+            //.Select(ln => ln.FSplit("-", " ", ":"))
+            //.Select(tkns => tkns.Tuplify(AsInt, AsChar, AsString))
+            //.Where(t => t.t1 < t.t2)
+
         }
     }
 }

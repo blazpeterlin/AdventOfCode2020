@@ -37,6 +37,11 @@ namespace AOC.Common
             }
         }
 
+        public static string[] FSplit(this string str, params string[] delimiters)
+        {
+            return str.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
+        }
+
         //public static IEnumerable<T> F
     }
 }

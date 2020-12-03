@@ -51,6 +51,8 @@ namespace AOC.Common
 
         public static string FilePath()
         {
+            //string cfg = Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyConfigurationAttribute>().Configuration;
+            string cfgCurr = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyConfigurationAttribute>().Configuration;
 #if DEBUGT
             //string filename = "" + num + "t";
             string filename = "input-t.txt";
@@ -58,6 +60,7 @@ namespace AOC.Common
             //string filename = "" + Day() + ".txt";
             string filename = "input.txt";
 #endif
+            if (cfgCurr == "DebugT") { filename = "input-t.txt"; } else { filename = "input.txt"; }
 
             string fpath =
                 Path.Combine(
