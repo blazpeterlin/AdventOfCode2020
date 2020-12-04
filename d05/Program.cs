@@ -5,7 +5,7 @@ using MoreLinq;
 using static System.Environment;
 using static AOC.Common.SmartConversions;
 
-namespace d00
+namespace d05
 {
     class Program
     {

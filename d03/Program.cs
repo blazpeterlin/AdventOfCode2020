@@ -57,7 +57,7 @@ namespace d03
                 if (lns[i][(i/2) % lns[0].Count] == '#') { cntr12++; }
             }
             var res1 = cntr3;
-            var res2 = cntr1 * cntr3 * cntr5 * cntr7 * cntr12;
+            var res2 = (long)cntr1 * cntr3 * cntr5 * cntr7 * cntr12;
         }
     }
 }

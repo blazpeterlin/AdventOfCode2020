@@ -12,6 +12,21 @@ namespace AOC.Common
 {
     public class InputHelper
     {
+        private Func<string, string> SettingModifyLines = SmartConversions.Id;
+        private Func<string, string> SettingModifyTxt = SmartConversions.Id;
+
+
+        public InputHelper ModifyLines(Func<string, string> ml)
+        {
+            SettingModifyLines = ml;
+            return this;
+        }
+        public InputHelper ModifyTxt(Func<string, string> mt)
+        {
+            SettingModifyTxt = mt;
+            return this;
+        }
+        public string CalcedTxt { get; set; }
 
         public static InputHelper LoadInput(int year)
         {
@@ -53,13 +68,14 @@ namespace AOC.Common
         {
             //string cfg = Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyConfigurationAttribute>().Configuration;
             string cfgCurr = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyConfigurationAttribute>().Configuration;
-#if DEBUGT
-            //string filename = "" + num + "t";
-            string filename = "input-t.txt";
-#else
-            //string filename = "" + Day() + ".txt";
-            string filename = "input.txt";
-#endif
+            //#if DEBUGT
+            //            //string filename = "" + num + "t";
+            //            string filename = "input-t.txt";
+            //#else
+            //            //string filename = "" + Day() + ".txt";
+            //            string filename = "input.txt";
+            //#endif
+            string filename;
             if (cfgCurr == "DebugT") { filename = "input-t.txt"; } else { filename = "input.txt"; }
 
             string fpath =
@@ -74,15 +90,38 @@ namespace AOC.Common
 
         }
 
+        public IEnumerable<string> FileInputModifiedLines
+        {
+            get
+            {
+                var txt = File.ReadAllText(FilePath());
+                return
+                    txt
+                    .Replace("\r", "")
+                    .FPipe(SettingModifyTxt)
+                    .FPipe(txt => txt.Split("\n"))
+                    .Select(SettingModifyLines)
+                    .Where(ln => ln != null);
+            }
+        }
+        public string FileInputModifiedText
+        {
+            get
+            {
+                return FileInputModifiedLines
+                    .FPipe(_ => string.Join("\n", _));
+            }
+        }
+
         public string AsText()
         {
-            return File.ReadAllText(FilePath());
+            return FileInputModifiedText;
         }
 
         public List<T> AsTokens<T>()
         {
             return
-                File.ReadAllText(FilePath())
+                FileInputModifiedText
                 .Split(new[] { " ", "\n", "\r", "," }, StringSplitOptions.RemoveEmptyEntries)
                 .FPipeMap(str => (T)Convert.ChangeType(str, typeof(T)))
                 .ToList();
@@ -90,14 +129,20 @@ namespace AOC.Common
 
         public List<List<char>> AsCharListOfLists()
         {
-            return File.ReadAllLines(FilePath()).Select(ln => ln.ToCharArray().ToList()).ToList();
+            return 
+                //File.ReadAllLines(FilePath())
+                FileInputModifiedLines
+                .Select(ln => ln.ToCharArray().ToList()).ToList();
         }
 
 
 
         public List<string> AsLines()
         {
-            return File.ReadAllLines(FilePath()).ToList();
+            return
+                //File.ReadAllLines(FilePath())
+                FileInputModifiedLines
+                .ToList();
         }
     }
 }

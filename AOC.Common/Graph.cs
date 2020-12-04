@@ -49,6 +49,64 @@ namespace AOC.Common
             };
         }
 
+        public IEnumerable<(List<T> path, double dist)> DFS(T start, T finish)
+        {
+            var hs = new HashSet<T> { start };
+            var st = new Stack<T>();
+            st.Push(start);
+            foreach (var res in DFS_Internal(hs, st, 0, finish))
+            {
+                yield return res;
+            }
+        }
+
+        private IEnumerable<(List<T> path, double dist)> DFS_Internal(HashSet<T> ignored, Stack<T> currPath, double currDist, T finish)
+        {
+            var curr = currPath.Peek();
+            if (curr.Equals(finish)) { yield return (currPath.ToList(), currDist); }
+            else
+            {
+                foreach (var tpl in GetAdj(curr))
+                {
+                    var (next, weight) = tpl;
+                    if (ignored.Contains(next)) { continue; }
+
+                    ignored.Add(next);
+                    currPath.Push(next);
+                    foreach (var res in DFS_Internal(ignored, currPath, currDist + weight, finish))
+                    {
+                        yield return res;
+                    }
+                    currPath.Pop();
+                    ignored.Remove(next);
+                }
+            }
+        }
+        //public IEnumerable<(List<T> path, double dist)> BFS(T start, T finish)
+        //{
+            
+        //    st.Push(start);
+        //    foreach (var res in DFS_Internal(hs, st, 0, finish))
+        //    {
+        //        yield return res;
+        //    }
+        //}
+
+        //private IEnumerable<(List<T> path, double dist)> BFS_Internal(T start, double currDist, T finish)
+        //{
+        //    var q = new Queue<(T node, double dist)>();
+        //    var visited = new HashSet<T>();
+        //    q.Enqueue(new List<T> { start });
+
+        //    while (q.Any())
+        //    {
+        //        var curr = q.Dequeue();
+        //        visited.Add(curr);
+
+        //        foreach()
+        //    }
+        //}
+
         public GraphResult<T> Dijkstra(T start, T finish)
         {
             //var info = Range(0, adjacency.Count).Select(i => (distance: double.PositiveInfinity, prev: i)).ToArray();
@@ -102,9 +160,9 @@ namespace AOC.Common
 
         private T _finish;
 
-        public GraphResult(Dictionary<T, ImmutableLinkedList<(T, double)>> pathsRev, T finish)
+        public GraphResult(Dictionary<T, ImmutableLinkedList<(T, double)>> paths, T finish)
         {
-            Paths = pathsRev;
+            Paths = paths;
             _finish = finish;
         }
 
@@ -117,54 +175,6 @@ namespace AOC.Common
             return Paths[_finish].First().totalDist;
         }
     }
-
-    //public class Graph
-    //{
-    //    private readonly List<EdgeList> adjacency;
-
-    //    public Graph(int vertexCount) => adjacency = Range(0, vertexCount).Select(v => new EdgeList()).ToList();
-
-    //    public int Count => adjacency.Count;
-    //    public bool HasEdge(int s, int e) => adjacency[s].Any(p => p.node == e);
-    //    public bool RemoveEdge(int s, int e) => adjacency[s].RemoveAll(p => p.node == e) > 0;
-
-    //    public bool AddEdge(int s, int e, double weight)
-    //    {
-    //        if (HasEdge(s, e)) return false;
-    //        adjacency[s].Add((e, weight));
-    //        return true;
-    //    }
-
-    //    public (double distance, int prev)[] FindPath(int start)
-    //    {
-    //        var info = Range(0, adjacency.Count).Select(i => (distance: double.PositiveInfinity, prev: i)).ToArray();
-    //        info[start].distance = 0;
-    //        var visited = new System.Collections.BitArray(adjacency.Count);
-
-    //        var heap = new Heap<(int node, double distance)>((a, b) => a.distance.CompareTo(b.distance));
-    //        heap.Push((start, 0));
-    //        while (heap.Count > 0)
-    //        {
-    //            var current = heap.Pop();
-    //            if (visited[current.node]) continue;
-    //            var edges = adjacency[current.node];
-    //            for (int n = 0; n < edges.Count; n++)
-    //            {
-    //                int v = edges[n].node;
-    //                if (visited[v]) continue;
-    //                double alt = info[current.node].distance + edges[n].weight;
-    //                if (alt < info[v].distance)
-    //                {
-    //                    info[v] = (alt, current.node);
-    //                    heap.Push((v, alt));
-    //                }
-    //            }
-    //            visited[current.node] = true;
-    //        }
-    //        return info;
-    //    }
-
-    //}
 
     public class Heap<T>
     {
@@ -226,56 +236,4 @@ namespace AOC.Common
         }
 
     }
-
-    //public class Graphs<T, U> where T: TreeNode<U>
-    //{
-    //    public T DijkstraOrBFS(T start)
-    //    {
-    //        Dictionary<int, List<T>> queue = new Dictionary<int, List<T>>();
-    //        var hStart = start.Heuristic();
-    //        queue[hStart] = new[] { start }.ToList();
-
-    //        Dictionary<U, int> distByState = new Dictionary<U, int>();
-
-    //        for(int i = hStart; ; i++)
-    //        {
-    //            if (!queue.TryGetValue(i, out var listR)) { continue; }
-
-    //            foreach (var r in listR.OrderBy(_ => _.Heuristic()))
-    //            {
-    //                if (r.IsEndGoal()) { return r; }
-
-    //                if (distByState.ContainsKey(r.State())) { continue; }
-
-    //                foreach(var child in r.Expand().Cast<T>())
-    //                {
-    //                    int h = child.Heuristic();
-    //                    if (h <= 0) { throw new Exception("Should I just return child right here, then?"); }
-    //                    if (!queue.ContainsKey(h)) { queue[h] = new List<T>(); }
-    //                    queue[h].Add(child);
-    //                }
-    //            }
-    //        }
-
-    //        throw new Exception("Nothing found with DijsktraOrBFS");
-    //    }
-
-    //    public T DFS(T start)
-    //    {
-    //        Stack<T> queue = new Stack<T>();
-    //        queue.Push(start);
-
-    //        while(queue.Any())
-    //        {
-    //            var r= queue.Pop();
-    //            if (r.IsEndGoal()) { return r; }
-    //            foreach(var child in r.Expand()?.Cast<T>() ?? new List<T>())
-    //            {
-    //                queue.Push(child);
-    //            }
-    //        }
-
-    //        throw new Exception("Nothing found with DFS");
-    //    }
-    //}
 }
