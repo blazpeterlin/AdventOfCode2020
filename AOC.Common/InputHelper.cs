@@ -95,13 +95,16 @@ namespace AOC.Common
             get
             {
                 var txt = File.ReadAllText(FilePath());
-                return
+                var res = 
                     txt
                     .Replace("\r", "")
                     .FPipe(SettingModifyTxt)
                     .FPipe(txt => txt.Split("\n"))
                     .Select(SettingModifyLines)
-                    .Where(ln => ln != null);
+                    .Where(ln => ln != null)
+                    .ToList();
+                if (res.Last() == "") { res.RemoveAt(res.Count - 1); }
+                return res;
             }
         }
         public string FileInputModifiedText

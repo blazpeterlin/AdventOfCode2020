@@ -13,6 +13,8 @@ namespace AOC.Common
 
         public static Func<(int x, int y), (int, int)> TurnLeft = tpl => (-tpl.y, tpl.x);
         public static Func<(int x, int y), (int, int)> TurnRight = tpl => (tpl.y, -tpl.x);
+        public static Func<(int x, int y), (int, int)> TurnForward = tpl => tpl;
+        public static Func<(int x, int y), (int, int)> TurnBack = tpl => (-tpl.x, -tpl.y);
 
         public static Func<(int, int), IEnumerable<((int, int), double)>> PLUS = ((int x, int y) tpl) =>
         {

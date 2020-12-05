@@ -42,6 +42,63 @@ namespace AOC.Common
             return str.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
         }
 
-        //public static IEnumerable<T> F
+        public static IEnumerable<int> FRng(int min, int max)
+        {
+            for(int val = min; val<max; val++)
+            {
+                yield return val;
+            }
+        }
+        public static IEnumerable<long> FRng(long min, long max)
+        {
+            for (var val = min; val < max; val++)
+            {
+                yield return val;
+            }
+        }
+
+        public static IEnumerable<(int fst,int snd)> FRng(this IEnumerable<int> listFst, int min, int max)
+        {
+            foreach (var fst in listFst)
+            {
+                for (var snd = min; snd < max; snd++)
+                {
+                    yield return (fst,snd);
+                }
+            }
+        }
+
+        public static IEnumerable<(long fst, long snd)> FRng(this IEnumerable<long> listFst, long min, long max)
+        {
+            foreach (var fst in listFst)
+            {
+                for (var snd = min; snd < max; snd++)
+                {
+                    yield return (fst, snd);
+                }
+            }
+        }
+
+        public static IEnumerable<(int fst, int snd, int thd)> FRng(this IEnumerable<(int, int)> listFstSnd, int min, int max)
+        {
+            foreach (var (fst,snd) in listFstSnd)
+            {
+                for (var thd = min; thd < max; thd++)
+                {
+                    yield return (fst, snd, thd);
+                }
+            }
+        }
+
+        public static IEnumerable<(long fst, long snd, long thd)> FRng(this IEnumerable<(long, long)> listFstSnd, long min, long max)
+        {
+            foreach (var (fst, snd) in listFstSnd)
+            {
+                for (var thd = min; thd < max; thd++)
+                {
+                    yield return (fst, snd, thd);
+                }
+            }
+        }
     }
 }

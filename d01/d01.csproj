@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AOC.CommonFS\AOC.CommonFS.fsproj" />
     <ProjectReference Include="..\AOC.Common\AOC.Common.csproj" />
   </ItemGroup>
 

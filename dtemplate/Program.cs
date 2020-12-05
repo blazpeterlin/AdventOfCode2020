@@ -4,6 +4,8 @@ using System.Linq;
 using MoreLinq;
 using static System.Environment;
 using static AOC.Common.SmartConversions;
+using System.Collections.Generic;
+using static AOC.Common.Func;
 
 namespace d00
 {
