@@ -13,13 +13,4 @@
     <ProjectReference Include="..\AOC.Common\AOC.Common.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="input-t.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="input.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>

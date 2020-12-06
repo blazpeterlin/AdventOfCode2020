@@ -10,14 +10,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Z3.x64" Version="4.8.9" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\AOC.Common\AOC.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="input-t.txt">
+    <None Update="input-z3-t.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="input.txt">
+    <None Update="input-z3.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

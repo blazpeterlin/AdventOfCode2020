@@ -7,6 +7,7 @@ using static AOC.Common.SmartConversions;
 using System.Collections.Generic;
 using static System.Linq.Enumerable;
 using static AOC.Common.Func;
+using static AOC.Common.Helpers;
 
 namespace d05
 {
@@ -14,7 +15,7 @@ namespace d05
     {
         public static (long res1, long res2) Solve()
         {
-            var ih = InputHelper.LoadInput(2020);
+            var ih = InputHelper.LoadInputP(2020);
             var lns = ih.AsLines();
 
             int maxX = 7, maxY = 127;
@@ -41,15 +42,20 @@ namespace d05
             HashSet<int> hsIds = new (planeSeats.Select(_ => _.Id));
             HashSet<(int, int)> hsSeats = new (planeSeats.Select(_ => (_.MinY, _.MinX)));
 
-            int res2 =
+            var res2seat =
                 FRng(1, maxY - 1)
                 .FRng(0, maxX)
                 .Where(t => !hsSeats.Contains(t))
                 .Select(t => new PlaneSeat { MinY = t.fst, MaxY = t.fst, MinX = t.snd, MaxX = t.snd, })
                 .Where(ps => hsIds.Contains(ps.Id - 1) && hsIds.Contains(ps.Id + 1))
-                .Single()
-                .Id
-                ;
+                .Single();
+            int res2 = res2seat.Id;
+
+            var dictMap = 
+                FRng(0, maxY)
+                .FRng(0, maxX)
+                .ToDictionary(tpl => tpl, tpl => hsSeats.Contains(tpl) ? CHAR_BLOCK : ((res2seat.MinY, res2seat.MinX) == tpl ? '#' : ' '));
+            dictMap.PrintScreenDictYX(' ');
 
             return (res1, res2);
         }

@@ -18,7 +18,7 @@ namespace d05
         static void Main(string[] args)
         {
             Solved6AM.Solve();
-            SolvedQuality.Solve();
+            var (res1, res2) = SolvedQuality.Solve();
         }
     }
 }

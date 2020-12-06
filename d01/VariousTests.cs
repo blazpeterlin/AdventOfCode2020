@@ -53,7 +53,7 @@ namespace d01
         {
 
             HashSet<int> s = new HashSet<int>();
-            var tkns = InputHelper.LoadInput(2018).AsTokens<int>();
+            var tkns = InputHelper.LoadInputP(2018).AsTokens<int>();
             var res =
                 tkns
                 //.Where(_ => true)
@@ -78,7 +78,7 @@ namespace d01
         {
             HashSet<int> s = new HashSet<int>();
             //var str = InputHelper.ToAllLines()
-            var tkns = InputHelper.LoadInput(2020).AsTokens<int>();
+            var tkns = InputHelper.LoadInputP(2020).AsTokens<int>();
 
             int num = tkns.Count;
             var res =

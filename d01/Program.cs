@@ -11,7 +11,7 @@ namespace d01
     {
         static void Main(string[] args)
         {
-            var tkns = InputHelper.LoadInput(2020).AsTokens<int>();
+            var tkns = InputHelper.LoadInputP(2020).AsTokens<int>();
             
             //int num = tkns.Count;
             //var res1 =

@@ -7,7 +7,7 @@ using static AOC.Common.SmartConversions;
 using System.Collections.Generic;
 using static AOC.Common.Func;
 
-namespace d00
+namespace d06
 {
     class Program
     {

@@ -245,7 +245,47 @@ namespace AOC.Common
             return Parse2list<T>(s).ToArray();
         }
 
-        public static void PrintScreenDict<U>(Dictionary<(long x, long y), U> screen, U defaultVal, Func<U, string> printFunc = null)
+        private static Dictionary<(int, int), U> FlipCoords<U>(this Dictionary<(int c1, int c2), U> screen)
+        {
+            return screen.Select(kvp => ((kvp.Key.c2, kvp.Key.c1), kvp.Value)).ToDictionary(tpl => tpl.Item1, tpl => tpl.Item2);
+        }
+        private static Dictionary<(long, long), U> FlipCoords<U>(this Dictionary<(long c1, long c2), U> screen)
+        {
+            return screen.Select(kvp => ((kvp.Key.c2, kvp.Key.c1), kvp.Value)).ToDictionary(tpl => tpl.Item1, tpl => tpl.Item2);
+        }
+
+        public static void PrintScreenDictYX<U>(this Dictionary<(int y, int x), U> screen, U defaultVal, Func<U, string> printFunc = null)
+        {
+            PrintScreenDictXY(screen.FlipCoords(), defaultVal, printFunc);
+        }
+        public static void PrintScreenDictYX<U>(this Dictionary<(long y, long x), U> screen, U defaultVal, Func<U, string> printFunc = null)
+        {
+            PrintScreenDictXY(screen.FlipCoords(), defaultVal, printFunc);
+        }
+
+        public static void PrintScreenDictXY<U>(this Dictionary<(int x, int y), U> screen, U defaultVal, Func<U, string> printFunc = null)
+        {
+            if (printFunc == null) { printFunc = (U u) => { return u?.ToString() ?? " "; }; };
+
+            var maxY = screen.Keys.Max(_ => _.y);
+            var maxX = screen.Keys.Max(_ => _.x);
+            var minY = screen.Keys.Min(_ => _.y);
+            var minX = screen.Keys.Min(_ => _.x);
+
+
+
+            for (var j = minY; j <= maxY; j++)
+            {
+                for (var i = minX; i <= maxX; i++)
+                {
+                    U val = screen.GetValueOrDefault((i, j), defaultVal);
+                    Console.Write(printFunc(val));
+                }
+                Console.WriteLine();
+            }
+        }
+
+        public static void PrintScreenDictXY<U>(this Dictionary<(long x, long y), U> screen, U defaultVal, Func<U, string> printFunc = null)
         {
             if (printFunc == null) { printFunc = (U u) => { return u?.ToString() ?? " "; } ; };
 

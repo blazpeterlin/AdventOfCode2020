@@ -13,7 +13,7 @@ namespace d04
         // Graph<(int, int)>.From2dWithMoves(pts, Moves.PLUS).Dijkstra((0,0),(3,1)).Path();
         static void Main(string[] args)
         {
-            var ih = InputHelper.LoadInput(2020);
+            var ih = InputHelper.LoadInputP(2020);
             // simplify input - passports split by "-" instead of empty line
             ih.ModifyLines(ln => { if (ln == "") return "-"; else return ln; });
             var lns = ih.AsLines();

@@ -41,6 +41,11 @@ namespace AOC.Common
         {
             return str.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
         }
+        public static string[] FSplit(this string str, params char[] delimiters)
+        {
+            return str.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
+        }
+
 
         public static IEnumerable<int> FRng(int min, int max)
         {

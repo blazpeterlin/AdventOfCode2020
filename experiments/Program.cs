@@ -7,13 +7,13 @@ using static AOC.Common.SmartConversions;
 using System.Collections.Generic;
 using static AOC.Common.Func;
 
-namespace d00
+namespace experiments
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Solved6AM.Solve();
+            Z3.Solve();
         }
     }
 }

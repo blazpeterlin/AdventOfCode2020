@@ -11,7 +11,7 @@ namespace d02
         static void Main(string[] args)
         {
             //AsText
-            var txt = InputHelper.LoadInput(2020).AsLines();
+            var txt = InputHelper.LoadInputP(2020).AsLines();
             var res1 = txt
                 .Select(ln => ln.Split(new[] { "-", " ", ":" }, StringSplitOptions.RemoveEmptyEntries))
                 .Select(tkns => (int.Parse(tkns[0]), int.Parse(tkns[1]), tkns[2], tkns[3]))

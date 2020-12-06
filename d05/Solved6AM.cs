@@ -12,7 +12,7 @@ namespace d05
     {
         public static void Solve()
         {
-            var ih = InputHelper.LoadInput(2020);
+            var ih = InputHelper.LoadInputP(2020);
             var lns = ih.AsLines();
             var txt = ih.AsText();
             //var tkns = ih.AsTokens<int>();

@@ -28,9 +28,11 @@ namespace AOC.Common
         }
         public string CalcedTxt { get; set; }
 
-        public static InputHelper LoadInput(int year)
+        public static InputHelper LoadInputP(int year)
         {
-            string fpath = FilePath();
+            string fname = "input.txt";
+            FilePath = CalcFilePath(fname);
+            string fpath = FilePath;
             string res;
             if (!File.Exists(fpath)) { File.WriteAllText(fpath, ""); res = ""; } else { res = File.ReadAllText(fpath); }
 
@@ -56,6 +58,58 @@ namespace AOC.Common
             }
             return new InputHelper();
         }
+        public static InputHelper LoadInputT(int year)
+        {
+            string fname = "input-t.txt";
+            FilePath = CalcFilePath(fname);
+            string fpath = FilePath;
+            string res;
+            if (!File.Exists(fpath)) { File.WriteAllText(fpath, ""); res = ""; } else { res = File.ReadAllText(fpath); }
+
+            return new InputHelper();
+        }
+
+        private static string CalcFilePath(string fname)
+        {
+            string fpath =
+                Path.Combine(
+                    Assembly.GetExecutingAssembly().Location
+                    .FPipe(Path.GetDirectoryName)
+                    .FPipe(Path.GetDirectoryName)
+                    .FPipe(Path.GetDirectoryName)
+                    .FPipe(Path.GetDirectoryName),
+                    fname);
+            return fpath;
+        }
+
+        //public static InputHelper LoadInput(int year)
+        //{
+        //    string fpath = FilePath();
+        //    string res;
+        //    if (!File.Exists(fpath)) { File.WriteAllText(fpath, ""); res = ""; } else { res = File.ReadAllText(fpath); }
+
+        //    if (res.Length == 0)
+        //    {
+        //        var baseAddress = new Uri("https://adventofcode.com");
+        //        var cookieContainer = new CookieContainer();
+        //        cookieContainer.Add(baseAddress, new Cookie("session", Consts.SessionId));
+
+        //        var httpc = new HttpClient(
+        //            new HttpClientHandler
+        //            {
+        //                CookieContainer = cookieContainer,
+        //                AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
+        //            })
+        //        {
+        //            BaseAddress = baseAddress,
+        //        };
+        //        var httpRes = httpc.GetAsync($"{year}/day/{Day()}/input").Result;
+        //        httpRes.EnsureSuccessStatusCode();
+        //        res = httpRes.Content.ReadAsStringAsync().Result;
+        //        File.WriteAllText(fpath, res);
+        //    }
+        //    return new InputHelper();
+        //}
 
         public static int Day()
         {
@@ -64,37 +118,13 @@ namespace AOC.Common
             return day;
         }
 
-        public static string FilePath()
-        {
-            //string cfg = Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyConfigurationAttribute>().Configuration;
-            string cfgCurr = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyConfigurationAttribute>().Configuration;
-            //#if DEBUGT
-            //            //string filename = "" + num + "t";
-            //            string filename = "input-t.txt";
-            //#else
-            //            //string filename = "" + Day() + ".txt";
-            //            string filename = "input.txt";
-            //#endif
-            string filename;
-            if (cfgCurr == "DebugT") { filename = "input-t.txt"; } else { filename = "input.txt"; }
-
-            string fpath =
-                Path.Combine(
-                    Assembly.GetExecutingAssembly().Location
-                    .FPipe(Path.GetDirectoryName)
-                    .FPipe(Path.GetDirectoryName)
-                    .FPipe(Path.GetDirectoryName)
-                    .FPipe(Path.GetDirectoryName),
-                    filename);
-            return fpath;
-
-        }
+        public static string FilePath { get; private set; }
 
         public IEnumerable<string> FileInputModifiedLines
         {
             get
             {
-                var txt = File.ReadAllText(FilePath());
+                var txt = File.ReadAllText(FilePath);
                 var res = 
                     txt
                     .Replace("\r", "")
@@ -121,19 +151,14 @@ namespace AOC.Common
             return FileInputModifiedText;
         }
 
-        public List<T> AsTokens<T>()
+        public List<T> AsTokens<T>(params string[] splitBy)
         {
-            return
-                FileInputModifiedText
-                .Split(new[] { " ", "\n", "\r", "," }, StringSplitOptions.RemoveEmptyEntries)
-                .FPipeMap(str => (T)Convert.ChangeType(str, typeof(T)))
-                .ToList();
+            return FileInputModifiedText.AsTokens<T>(splitBy);
         }
 
         public List<List<char>> AsCharListOfLists()
         {
             return 
-                //File.ReadAllLines(FilePath())
                 FileInputModifiedLines
                 .Select(ln => ln.ToCharArray().ToList()).ToList();
         }
@@ -143,7 +168,6 @@ namespace AOC.Common
         public List<string> AsLines()
         {
             return
-                //File.ReadAllLines(FilePath())
                 FileInputModifiedLines
                 .ToList();
         }

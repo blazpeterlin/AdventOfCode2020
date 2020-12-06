@@ -20,7 +20,7 @@ namespace d03
 
         static void Main(string[] args)
         {
-            var lns = InputHelper.LoadInput(2020).AsCharListOfLists();
+            var lns = InputHelper.LoadInputP(2020).AsCharListOfLists();
             //var txt = InputHelper.LoadInput(2020).AsText();
             //var tkns = InputHelper.LoadInput(2020).AsTokens<int>();
 

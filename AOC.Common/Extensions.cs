@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AOC.Common
 {
@@ -12,6 +13,17 @@ namespace AOC.Common
             return u;
         }
 
+        public static List<T> AsTokens<T>(this string s, params string[] splitBy)
+        {
+            if (splitBy?.Any() != true)
+            {
+                splitBy = new[] { " ", "\n", "\r", "," };
+            }
+            return s
+                .Split(splitBy, StringSplitOptions.RemoveEmptyEntries)
+                .FPipeMap(str => (T)Convert.ChangeType(str, typeof(T)))
+                .ToList();
+        }
         //public static GridPosition ToPos(this (int x, int y) pos)
         //{
         //    return new GridPosition(pos.x, pos.y); ;
