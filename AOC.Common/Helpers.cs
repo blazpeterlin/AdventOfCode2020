@@ -47,7 +47,7 @@ namespace AOC.Common
 
 
         public const char CHAR_BLOCK = '█';
-        public static List<List<T>> Permutations<T>(IEnumerable<T> allAvailable, int length, bool repeatable)
+        public static List<List<T>> Permutations<T>(this IEnumerable<T> allAvailable, int length, bool repeatable)
         {
             int currentIdx = 0;
 
