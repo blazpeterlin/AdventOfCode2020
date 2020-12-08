@@ -8,11 +8,11 @@ namespace AOC.Common
 {
     public static class SmartConversions
     {
-        public static int AsInt(string str) => int.Parse(str);
-        public static long AsLong(string str) => long.Parse(str);
-        public static float AsFloat(string str) => float.Parse(str);
-        public static char AsChar(string str) => str.Single();
-        public static double AsDouble(string str) => double.Parse(str);
+        public static int AsInt(this string str) => int.Parse(str);
+        public static long AsLong(this string str) => long.Parse(str);
+        public static float AsFloat(this string str) => float.Parse(str);
+        public static char AsChar(this string str) => str.Single();
+        public static double AsDouble(this string str) => double.Parse(str);
         public static T Id<T>(T t) => t;
         public static string AsString(string str) => str;
 

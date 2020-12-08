@@ -10,22 +10,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FParsec.CSharp" Version="12.0.4" />
-    <PackageReference Include="Microsoft.Z3.x64" Version="4.8.9" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\AOC.Common\AOC.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="input-parsec.txt">
+    <None Update="input-t.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="input-z3-t.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="input-z3.txt">
+    <None Update="input.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
