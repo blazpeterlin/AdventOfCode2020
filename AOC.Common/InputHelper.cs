@@ -28,6 +28,7 @@ namespace AOC.Common
         }
         public string CalcedTxt { get; set; }
 
+        public bool P { get; private set; }
         public static InputHelper LoadInputP(int year)
         {
             string fname = "input.txt";
@@ -56,7 +57,7 @@ namespace AOC.Common
                 res = httpRes.Content.ReadAsStringAsync().Result;
                 File.WriteAllText(fpath, res);
             }
-            return new InputHelper();
+            return new InputHelper() { P = true };
         }
         public static InputHelper LoadInputT(int year)
         {
