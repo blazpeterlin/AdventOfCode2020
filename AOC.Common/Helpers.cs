@@ -113,7 +113,7 @@ namespace AOC.Common
                 {
                     if (p(map[j][i]))
                     {
-                        return (i, j);
+                        return (j, i);
                     }
                 }
             }
@@ -128,7 +128,7 @@ namespace AOC.Common
                 {
                     if (p(map[j][i]))
                     {
-                        result.Add((i, j));
+                        result.Add((j, i));
                         //return (i, j);
                     }
                 }
@@ -143,7 +143,7 @@ namespace AOC.Common
             {
                 for (int i = 0; i < printer.GetLength(0); i++)
                 {
-                    Console.Write(fncPrint(printer[i, j]));
+                    Console.Write(fncPrint(printer[j, i]));
                 }
                 Console.WriteLine();
             }
@@ -155,7 +155,7 @@ namespace AOC.Common
             {
                 for (int i = 0; i < printer.GetLength(0); i++)
                 {
-                    Console.Write(printer[i, j].ToString());
+                    Console.Write(printer[j, i].ToString());
                 }
                 Console.WriteLine();
             }
@@ -192,25 +192,58 @@ namespace AOC.Common
             {
                 for (int i = 0; i < map[j].Count; i++)
                 {
-                    dict[(i, j)] = map[j][i];
+                    dict[(j, i)] = map[j][i];
                 }
             }
             return dict;
         }
 
-        public static Dictionary<T, List<(int x, int y)>> ToPosListByVal<T>(this List<List<T>> map)
+        public static Dictionary<T, List<(int y, int x)>> ToPosListByVal<T>(this List<List<T>> map)
         {
-            var dict = new Dictionary<T, List<(int x, int y)>>();
+            var dict = new Dictionary<T, List<(int y, int x)>>();
             for (int j = 0; j < map.Count; j++)
             {
                 for (int i = 0; i < map[j].Count; i++)
                 {
                     var val = map[j][i];
-                    if (!dict.ContainsKey(val)) { dict[val] = new List<(int x, int y)>(); }
-                    dict[val].Add((i, j));
+                    if (!dict.ContainsKey(val)) { dict[val] = new List<(int y, int x)>(); }
+                    dict[val].Add((j, i));
                 }
             }
             return dict;
+        }
+
+
+        public static IEnumerable<(int d1,int d2)> Slice2d<T>(this List<List<T>> lst2d, bool skipSmallerSlicesOnEdge, int start1d, int size1d, int start2d, int size2d)
+        {
+            if (!(
+                skipSmallerSlicesOnEdge 
+                && (start1d < 0 || start1d + size1d >= lst2d.Count || start2d < 0 || start2d + size2d >= lst2d[0].Count)
+                ))
+            {
+                for (int d1 = start1d; d1 < start1d + size1d; d1++)
+                {
+                    if (d1 < 0 || d1 >= lst2d.Count) { continue; }
+                    foreach(var d2 in Slice1d(lst2d[d1], skipSmallerSlicesOnEdge, start2d, size2d))
+                    {
+                        yield return (d1, d2);
+                    }
+                }
+            }
+        }
+        public static IEnumerable<int> Slice1d<T>(this List<T> lst, bool skipSmallerSlicesOnEdge, int start1d, int size1d)
+        {
+            if (!(
+                skipSmallerSlicesOnEdge
+                && (start1d < 0 || start1d + size1d >= lst.Count)
+                ))
+            {
+                for (int d1 = start1d; d1 < start1d + size1d; d1++)
+                {
+                    if (d1 < 0 || d1 >= lst.Count) { continue; }
+                    yield return d1;
+                }
+            }
         }
 
         public static bool CoordsOK(int _x, int _y, int LX, int LY)
@@ -334,6 +367,26 @@ namespace AOC.Common
             clipboardExecutable.StandardInput.Close();
 
             return;
+        }
+    }
+
+    public static class TplExt
+    {
+        public static (int, int) Add(this (int, int) a, (int, int) b)
+        {
+            return (a.Item1 + b.Item1, a.Item2 + b.Item2);
+        }
+        public static (long, long) Add(this (long, long) a, (long, long) b)
+        {
+            return (a.Item1 + b.Item1, a.Item2 + b.Item2);
+        }
+        public static (float, float) Add(this (float, float) a, (float, float) b)
+        {
+            return (a.Item1 + b.Item1, a.Item2 + b.Item2);
+        }
+        public static (decimal, decimal) Add(this (decimal, decimal) a, (decimal, decimal) b)
+        {
+            return (a.Item1 + b.Item1, a.Item2 + b.Item2);
         }
     }
 }

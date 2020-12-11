@@ -37,7 +37,8 @@ namespace d10
         public static void Solve()
         {
             var ih = InputHelper.LoadInputP(2020);
-            var lns = ih.AsLines().Select(_ =>_.AsInt()).OrderBy(_ =>_).ToList();
+            //var lns = ih.AsLines().Select(AsInt).OrderBy(_ => _).ToList();
+            var lns = ih.AsLines().Select(_ => _.AsInt()).OrderBy(_ => _).ToList();
             lns.Insert(0, 0);
 
             var j1 = lns.Window(2).Where(lst => lst[1] - lst[0] == 1).Count();

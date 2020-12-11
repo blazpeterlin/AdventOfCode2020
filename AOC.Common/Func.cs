@@ -26,6 +26,64 @@ namespace AOC.Common
             return res;
         }
 
+        public static IEnumerable<T> FUnfoldClass<T>(this T startElt, Func<T, T> fnc) where T:class
+        {
+            var currElt = startElt;
+            while (true)
+            {
+                var fncOutput = fnc(currElt);
+                if (fncOutput == null) { break; }
+                yield return fncOutput;
+                currElt = fncOutput;
+            }
+        }
+        public static IEnumerable<(T1,T2)?> FUnfold<T1,T2>(this (T1,T2) startElt, Func<(T1,T2)?, (T1,T2)?> fnc)
+        {
+            var currElt = startElt;
+            while (true)
+            {
+                var fncOutput = fnc(currElt);
+                if (fncOutput == null) { break; }
+                yield return fncOutput.Value;
+                currElt = fncOutput.Value;
+            }
+        }
+        public static IEnumerable<(T1, T2, T3)?> FUnfold<T1, T2, T3>(this (T1, T2, T3) startElt, Func<(T1, T2, T3)?, (T1, T2, T3)?> fnc)
+        {
+            var currElt = startElt;
+            while (true)
+            {
+                var fncOutput = fnc(currElt);
+                if (fncOutput == null) { break; }
+                yield return fncOutput.Value;
+                currElt = fncOutput.Value;
+            }
+        }
+        public static IEnumerable<(T1, T2, T3, T4)?> FUnfold<T1, T2, T3, T4>(this (T1, T2, T3, T4) startElt, Func<(T1, T2, T3, T4)?, (T1, T2, T3, T4)?> fnc)
+        {
+            var currElt = startElt;
+            while (true)
+            {
+                var fncOutput = fnc(currElt);
+                if (fncOutput == null) { break; }
+                yield return fncOutput.Value;
+                currElt = fncOutput.Value;
+            }
+        }
+
+        public static IEnumerable<U> FUnfold<T, U>(this T startElt, Func<T, (U, T)?> fnc)
+        {
+            var currElt = startElt;
+            while(true)
+            {
+                var fncOutput = fnc(currElt);
+                if (fncOutput == null) { break; }
+                var (eltOutput, nextElt) = fncOutput.Value;
+                yield return eltOutput;
+                currElt = nextElt;
+            }
+        }
+
         public static IEnumerable<TState> FScan<T, TState>(this IEnumerable<T> list, Func<T, TState, TState> fnc, TState init)
         {
             var res = init;
@@ -47,16 +105,16 @@ namespace AOC.Common
         }
 
 
-        public static IEnumerable<int> FRng(int min, int max)
+        public static IEnumerable<int> FRng(int min, int exceptMax)
         {
-            for(int val = min; val<max; val++)
+            for(int val = min; val<exceptMax; val++)
             {
                 yield return val;
             }
         }
-        public static IEnumerable<long> FRng(long min, long max)
+        public static IEnumerable<long> FRng(long min, long exceptMax)
         {
-            for (var val = min; val < max; val++)
+            for (var val = min; val < exceptMax; val++)
             {
                 yield return val;
             }

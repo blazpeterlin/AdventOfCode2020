@@ -9,7 +9,7 @@ using static System.Environment;
 using static AOC.Common.SmartConversions;
 using static AOC.Common.Func;
 
-namespace d11
+namespace d12
 {
     enum VMHaltState
     {
