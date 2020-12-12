@@ -23,15 +23,22 @@ namespace d12
                 var pos = (0, 0);
                 foreach (var (ins, num) in lns)
                 {
-                    if (ins == 'N') { pos = pos.Add((0, num)); }
-                    if (ins == 'S') { pos = pos.Add((0, -num)); }
-                    if (ins == 'W') { pos = pos.Add((-num, 0)); }
-                    if (ins == 'E') { pos = pos.Add((num, 0)); }
+                    pos = ins switch
+                    {
+                        'N' => pos.Add((0, num)),
+                        'S' => pos.Add((0, -num)),
+                        'W' => pos.Add((-num, 0)),
+                        'E' => pos.Add((num, 0)),
+                        'F' => pos.Add(dir.Multi(num)),
+                        _ => pos
+                    };
 
-                    if (ins == 'F') { pos = pos.Add((dir.Item1 * num, dir.Item2 * num)); }
-
-                    if (ins == 'L') { dir = Moves.TurnDegreesCCW(num)(dir); }
-                    if (ins == 'R') { dir = Moves.TurnDegreesCW(num)(dir); }
+                    dir = ins switch
+                    {
+                        'L' => Moves.TurnDegreesCCW(num)(dir),
+                        'R' => Moves.TurnDegreesCW(num)(dir),
+                        _ => dir
+                    };
                 }
 
                 var res1 = Math.Abs(pos.Item1) + Math.Abs(pos.Item2);
@@ -43,15 +50,22 @@ namespace d12
                 var pos = (0, 0);
                 foreach (var (ins, num) in lns)
                 {
-                    if (ins == 'N') { wp = wp.Add((0, num)); }
-                    if (ins == 'S') { wp = wp.Add((0, -num)); }
-                    if (ins == 'W') { wp = wp.Add((-num, 0)); }
-                    if (ins == 'E') { wp = wp.Add((num, 0)); }
+                    pos = ins switch
+                    {
+                        'F' => pos.Add(wp.Multi(num)),
+                        _ => pos
+                    };
 
-                    if (ins == 'F') { pos = pos.Add(( wp.Item1*num, wp.Item2 * num)); }
-
-                    if (ins == 'L') { wp = Moves.TurnDegreesCCW(num)(wp); }
-                    if (ins == 'R') { wp = Moves.TurnDegreesCW(num)(wp); }
+                    wp = ins switch
+                    {
+                        'N' => wp.Add((0, num)),
+                        'S' => wp.Add((0, -num)),
+                        'W' => wp.Add((-num, 0)),
+                        'E' => wp.Add((num, 0)),
+                        'L' => Moves.TurnDegreesCCW(num)(wp),
+                        'R' => Moves.TurnDegreesCW(num)(wp),
+                        _ => wp,
+                    };
                 }
 
                 var res2 = Math.Abs(pos.Item1) + Math.Abs(pos.Item2);
