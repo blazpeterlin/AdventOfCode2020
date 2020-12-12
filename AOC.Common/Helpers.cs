@@ -368,6 +368,74 @@ namespace AOC.Common
 
             return;
         }
+
+
+        public static IEnumerable<IEnumerable<T>> SliceD1<T>(this IEnumerable<IEnumerable<T>> array, params int[] d1)
+        {
+            foreach (var d1e in d1)
+            {
+                yield return array.ElementAt(d1e);
+            }
+        }
+        public static IEnumerable<IEnumerable<T>> SliceD2<T>(this IEnumerable<IEnumerable<T>> array, params int[] d2)
+        {
+            foreach (var d1e in array)
+            {
+                yield return d1e.Slice_Once(d2);
+            }
+        }
+
+        private static IEnumerable<T> Slice_Once<T>(this IEnumerable<T> array, params int[] elts)
+        {
+            var smartArr = array.Take(elts.Max()+1).ToList();
+            foreach(var elt in elts)
+            {
+                yield return smartArr.ElementAt(elt);
+            }
+        }
+
+        //private static IEnumerable<T> SliceD1_Once<T>(this IEnumerable<IEnumerable<T>> array, int d1e)
+        //{
+        //    return array.ElementAt(d1e);
+        //}
+        //private static IEnumerable<T> SliceD2_Once<T>(this IEnumerable<IEnumerable<T>> array, int d1e, params int[] d2)
+        //{
+        //    foreach (var d2e in d2)
+        //    {
+        //        yield return array.ElementAt(d1e).ElementAt(d2e);
+        //    }
+        //}
+
+        private static IEnumerable<T> SliceD1_Once<T>(this T[,] array, int d1e)
+        {
+            for(int d2e = 0; d2e < array.GetLength(1); d2e++)
+            {
+                yield return array[d1e, d2e];
+            }
+        }
+        private static IEnumerable<T> SliceD2_Once<T>(this T[,] array, int d1e, params int[] d2)
+        {
+            foreach(var d2e in d2)
+            {
+                yield return array[d1e, d2e];
+            }
+        }
+
+        public static IEnumerable<IEnumerable<T>> SliceD1<T>(this T[,] array, params int[] d1)
+        {
+            foreach (var d1e in d1)
+            {
+                yield return array.SliceD1_Once(d1e);
+            }
+        }
+
+        public static IEnumerable<IEnumerable<T>> SliceD2<T>(this T[,] array, params int[] d2)
+        {
+            for (var d1e = 0; d1e < array.GetLength(0); d1e++)
+            {
+                yield return array.SliceD2_Once(d1e, d2);
+            }
+        }
     }
 
     public static class TplExt
@@ -441,5 +509,6 @@ namespace AOC.Common
         {
             return (a.Item1 * factor, a.Item2 * factor);
         }
+
     }
 }

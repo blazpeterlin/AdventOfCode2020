@@ -9,7 +9,7 @@ using static System.Environment;
 using static AOC.Common.SmartConversions;
 using static AOC.Common.Func;
 
-namespace d00
+namespace d13
 {
     class Solved6AM
     {
