@@ -10,6 +10,30 @@ namespace AOC.Common
 {
     public static class Moves
     {
+        /// <summary>
+        /// Counter Clockwise
+        /// </summary>
+        public static Func<(int x, int y), (int, int)> TurnDegreesCCW(double deg)
+        {
+            double rad = deg * (Math.PI / 180);
+            return tpl =>
+                tpl switch
+                {
+                    (int x, int y) => ((int)Math.Round(Math.Cos(rad) * x - Math.Sin(rad) * y), (int)Math.Round(Math.Sin(rad) * x + Math.Cos(rad) * y))
+                };
+        }
+        /// <summary>
+        /// Clockwise
+        /// </summary>
+        public static Func<(int x, int y), (int, int)> TurnDegreesCW(double deg)
+        {
+            double rad = (-deg) * (Math.PI / 180);
+            return tpl =>
+                tpl switch
+                {
+                    (int x, int y) => ((int)Math.Round(Math.Cos(rad) * x - Math.Sin(rad) * y), (int)Math.Round(Math.Sin(rad) * x + Math.Cos(rad) * y))
+                };
+        }
 
         public static Func<(int x, int y), (int, int)> TurnLeft = tpl => (-tpl.y, tpl.x);
         public static Func<(int x, int y), (int, int)> TurnRight = tpl => (tpl.y, -tpl.x);
@@ -49,6 +73,56 @@ namespace AOC.Common
                 Nodes = new HashSet<T>(nodes),
                 GetAdj = moves,
             };
+        }
+
+        public IEnumerable<T> BFS_Simple(T start)
+        {
+            HashSet<T> hs = new();
+            var q = new Queue<T>();
+            q.Enqueue(start);
+            hs.Add(start);
+
+            while (q.Any())
+            {
+                var curr = q.Dequeue();
+                yield return curr;
+
+                foreach (var adj in GetAdj(curr))
+                {
+                    var next = adj.node;
+                    if (hs.Contains(next)) { continue; }
+
+                    q.Enqueue(next);
+                    hs.Add(next);
+
+                    curr = next;
+                }
+            }
+        }
+
+        public IEnumerable<T> DFS_Simple(T start)
+        {
+            HashSet<T> hs = new();
+            var st = new Stack<T>();
+            st.Push(start);
+            hs.Add(start);
+
+            while (st.Any())
+            {
+                var curr = st.Pop();
+                yield return curr;
+
+                foreach (var adj in GetAdj(curr).Reverse())
+                {
+                    var next = adj.node;
+                    if (hs.Contains(next)) { continue; }
+
+                    st.Push(next);
+                    hs.Add(next);
+
+                    curr = next;
+                }
+            }
         }
 
         public IEnumerable<(List<T> path, double dist)> DFS(T start, T finish)

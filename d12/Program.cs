@@ -14,6 +14,7 @@ namespace d12
         static void Main(string[] args)
         {
             Solved6AM.Solve();
+            SolvedQuality.Solve();
         }
     }
 }

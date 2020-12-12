@@ -388,5 +388,58 @@ namespace AOC.Common
         {
             return (a.Item1 + b.Item1, a.Item2 + b.Item2);
         }
+
+        public static (int, int) Subtract(this (int, int) a, (int, int) b)
+        {
+            return (a.Item1 - b.Item1, a.Item2 - b.Item2);
+        }
+        public static (long, long) Subtract(this (long, long) a, (long, long) b)
+        {
+            return (a.Item1 - b.Item1, a.Item2 - b.Item2);
+        }
+        public static (float, float) Subtract(this (float, float) a, (float, float) b)
+        {
+            return (a.Item1 - b.Item1, a.Item2 - b.Item2);
+        }
+        public static (decimal, decimal) Subtract(this (decimal, decimal) a, (decimal, decimal) b)
+        {
+            return (a.Item1 - b.Item1, a.Item2 - b.Item2);
+        }
+
+
+        public static (int, int) Multi(this (int, int) a, (int, int) b)
+        {
+            return (a.Item1 * b.Item1, a.Item2 * b.Item2);
+        }
+        public static (long, long) Multi(this (long, long) a, (long, long) b)
+        {
+            return (a.Item1 * b.Item1, a.Item2 * b.Item2);
+        }
+        public static (float, float) Multi(this (float, float) a, (float, float) b)
+        {
+            return (a.Item1 * b.Item1, a.Item2 * b.Item2);
+        }
+        public static (decimal, decimal) Multi(this (decimal, decimal) a, (decimal, decimal) b)
+        {
+            return (a.Item1 * b.Item1, a.Item2 * b.Item2);
+        }
+
+
+        public static (int, int) Multi(this (int, int) a, int factor)
+        {
+            return (a.Item1 * factor, a.Item2 * factor);
+        }
+        public static (long, long) Multi(this (long, long) a, long factor)
+        {
+            return (a.Item1 * factor, a.Item2 * factor);
+        }
+        public static (float, float) Multi(this (float, float) a, float factor)
+        {
+            return (a.Item1 * factor, a.Item2 * factor);
+        }
+        public static (decimal, decimal) Multi(this (decimal, decimal) a, decimal factor)
+        {
+            return (a.Item1 * factor, a.Item2 * factor);
+        }
     }
 }
