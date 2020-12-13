@@ -8,6 +8,7 @@ using MoreLinq;
 using static System.Environment;
 using static AOC.Common.SmartConversions;
 using static AOC.Common.Func;
+using System.Numerics;
 
 namespace d13
 {
@@ -39,9 +40,33 @@ namespace d13
         public static void Solve()
         {
             var ih = InputHelper.LoadInputP(2020);
-            var lns = ih.AsLines();
+            var lns = ih.AsLines().Skip(1).Select(str =>str.FSplit(",")).SelectMany(_ => _).Where(_ =>_!="x").Select(int.Parse);
+            var st = ih.AsLines().First().FPipe(int.Parse);
 
+            var fst = lns.OrderBy(bus => st - (st % bus)).First();
+            var res1 = (Math.Abs(fst - (st % fst))) * fst;
 
+            var lns2 = ih.AsLines().Skip(1).Select(str => str.FSplit(",")).SelectMany(_ => _).Select((str,idx) => (str, idx))
+                .Where(_ => _.Item1 != "x").Select(tpl => (long.Parse(tpl.Item1), tpl.Item2)).ToList();
+
+            //// this failed spectacularly
+            //new Z3().Solve(lns2);
+
+            BigInteger basic = lns2.First().Item1;
+            BigInteger increment = basic;
+            int currentWorking = 1;
+            BigInteger res2;
+            for (BigInteger x = basic; ; x += increment)
+            {
+                var ln = lns2[currentWorking];
+                if ((x+ln.Item2)%ln.Item1 == 0)
+                {
+                    increment *= ln.Item1;
+                    currentWorking++;
+                }
+
+                if (currentWorking == lns2.Count) { res2 = x; break; }
+            }
         }
     }
 }
