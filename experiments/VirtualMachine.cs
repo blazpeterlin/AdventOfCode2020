@@ -1,15 +1,11 @@
-﻿using System;
+﻿using AOC.Common;
+using MoreLinq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AOC.Common;
-using MoreLinq;
-using static System.Environment;
 using static AOC.Common.SmartConversions;
-using static AOC.Common.Func;
 
-namespace d00
+namespace experiments
 {
     enum VMHaltState
     {

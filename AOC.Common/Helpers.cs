@@ -251,6 +251,15 @@ namespace AOC.Common
             if (_x < 0 || _y < 0 || _x >= LX || _y >= LY) { return false; }
             return true;
         }
+        public static bool IndexOK<T>(this List<List<T>> lst, int x, int y)
+        {
+            return x >= 0 && x < lst.Count && y >= 0 && y < lst[x].Count;
+        }
+        public static bool IndexOK<T>(this List<T> lst, int x)
+        {
+            return x >= 0 && x < lst.Count;
+        }
+
         public static int GCD(int x, int y)
         {
             return y == 0 ? x : GCD(y, x % y);

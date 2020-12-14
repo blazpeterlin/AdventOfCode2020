@@ -40,6 +40,9 @@ namespace d13
         public static void Solve()
         {
             var ih = InputHelper.LoadInputP(2020);
+
+            var lnsTest = ih.AsLines().Skip(1).Single().Split(",").ToList();
+
             var lns = ih.AsLines().Skip(1).Select(str =>str.FSplit(",")).SelectMany(_ => _).Where(_ =>_!="x").Select(int.Parse);
             var st = ih.AsLines().First().FPipe(int.Parse);
 
