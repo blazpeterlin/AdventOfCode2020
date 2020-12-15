@@ -98,17 +98,8 @@ namespace d14
 
                         foreach(long wt in writingTo)
                         {
-                            //var numFinal = num & maskAND1 | maskOR1;
-                            //finalNums[wt] =numFinal;
                             finalNums[wt] = num;
                         }
-
-                        //long numIntermediate = num & maskAND | maskOR;
-                        //finalNums[idx] = new List<long>();
-                        //foreach(var or2 in maskOR2)
-                        //{
-                        //    finalNums[idx].Add(numIntermediate | or2);
-                        //}
                     }
                 }
 
