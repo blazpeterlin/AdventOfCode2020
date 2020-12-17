@@ -153,6 +153,17 @@ namespace AOC.Common
             }
         }
 
+        public static IEnumerable<(int fst, int snd, int thd, int fth)> FRng(this IEnumerable<(int, int, int)> listFstSndThd, int min, int max)
+        {
+            foreach (var (fst, snd, thd) in listFstSndThd)
+            {
+                for (var fth = min; fth < max; fth++)
+                {
+                    yield return (fst, snd, thd, fth);
+                }
+            }
+        }
+
         public static IEnumerable<(long fst, long snd, long thd)> FRng(this IEnumerable<(long, long)> listFstSnd, long min, long max)
         {
             foreach (var (fst, snd) in listFstSnd)
@@ -163,5 +174,66 @@ namespace AOC.Common
                 }
             }
         }
+        public static IEnumerable<(long fst, long snd, long thd, long fth)> FRng(this IEnumerable<(long, long, long)> listFstSndThd, long min, long max)
+        {
+            foreach (var (fst, snd, thd) in listFstSndThd)
+            {
+                for (var fth = min; fth < max; fth++)
+                {
+                    yield return (fst, snd, thd, fth);
+                }
+            }
+        }
+
+
+
+
+
+
+        public static IEnumerable<T1> FTupled<T1>(params T1[] seed)
+        {
+            return seed;
+        }
+        public static IEnumerable<(T1 fst, T2 snd)> FTupled<T1, T2>(this IEnumerable<T1> listFst, params T2[] seed)
+        {
+            foreach (var fst in listFst)
+            {
+                foreach (var s in seed)
+                {
+                    yield return (fst, s);
+                }
+            }
+        }
+        public static IEnumerable<(T1 fst, T2 snd, T3 thd)> FTupled<T1, T2, T3>(this IEnumerable<(T1, T2)> listFstSnd, params T3[] seed)
+        {
+            foreach (var (fst, snd) in listFstSnd)
+            {
+                foreach (var s in seed)
+                {
+                    yield return (fst, snd, s);
+                }
+            }
+        }
+        public static IEnumerable<(T1 fst, T2 snd, T3 thd, T4 frh)> FTupled<T1, T2, T3, T4>(this IEnumerable<(T1, T2, T3)> listFstSndThd, params T4[] seed)
+        {
+            foreach (var (fst, snd, thd) in listFstSndThd)
+            {
+                foreach (var s in seed)
+                {
+                    yield return (fst, snd, thd, s);
+                }
+            }
+        }
+        public static IEnumerable<(T1 fst, T2 snd, T3 thd, T4 frh, T5 ffh)> FTupled<T1, T2, T3, T4, T5, T6>(this IEnumerable<(T1, T2, T3, T4)> listFstSndThd, params T5[] seed)
+        {
+            foreach (var (fst, snd, thd, frh) in listFstSndThd)
+            {
+                foreach (var s in seed)
+                {
+                    yield return (fst, snd, thd, frh, s);
+                }
+            }
+        }
+
     }
 }
