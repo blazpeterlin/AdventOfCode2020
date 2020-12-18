@@ -76,35 +76,6 @@ namespace AOC.Common
         }
 
 
-        public static List<List<int>> Permutations(int minPhase, int maxPhase, int totalNumbers)
-        {
-            int length = totalNumbers;
-            int currentIdx = 0;
-
-            List<List<int>> result = new List<List<int>>() { new List<int>() };
-
-            while (currentIdx < length)
-            {
-                var r2 = new List<List<int>>();
-                foreach (var r in result)
-                {
-                    for (int phase = minPhase; phase <= maxPhase; phase++)
-                    {
-                        var l2 = r.ToList();
-                        l2.Add(phase);
-                        if (l2.Distinct().Count() == l2.Count())
-                        {
-                            r2.Add(l2);
-                        }
-                    }
-                }
-                result = r2;
-
-                currentIdx++;
-            }
-            return result;
-        }
-
         public static (int x, int y) FindPos(this List<List<char>> map, Func<char, bool> p)
         {
             for(int j = 0; j < map.Count; j++)

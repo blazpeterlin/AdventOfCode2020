@@ -120,7 +120,7 @@ namespace AOC.Common
             }
         }
 
-        public static IEnumerable<(int fst,int snd)> FRng(this IEnumerable<int> listFst, int min, int max)
+        public static IEnumerable<(T1 fst,int snd)> FRng<T1>(this IEnumerable<T1> listFst, int min, int max)
         {
             foreach (var fst in listFst)
             {
@@ -131,7 +131,7 @@ namespace AOC.Common
             }
         }
 
-        public static IEnumerable<(long fst, long snd)> FRng(this IEnumerable<long> listFst, long min, long max)
+        public static IEnumerable<(T1 fst, long snd)> FRng<T1>(this IEnumerable<T1> listFst, long min, long max)
         {
             foreach (var fst in listFst)
             {
@@ -142,7 +142,7 @@ namespace AOC.Common
             }
         }
 
-        public static IEnumerable<(int fst, int snd, int thd)> FRng(this IEnumerable<(int, int)> listFstSnd, int min, int max)
+        public static IEnumerable<(T1 fst, T2 snd, int thd)> FRng<T1,T2>(this IEnumerable<(T1, T2)> listFstSnd, int min, int max)
         {
             foreach (var (fst,snd) in listFstSnd)
             {
@@ -153,7 +153,7 @@ namespace AOC.Common
             }
         }
 
-        public static IEnumerable<(int fst, int snd, int thd, int fth)> FRng(this IEnumerable<(int, int, int)> listFstSndThd, int min, int max)
+        public static IEnumerable<(T1 fst, T2 snd, T3 thd, int fth)> FRng<T1,T2,T3>(this IEnumerable<(T1, T2, T3)> listFstSndThd, int min, int max)
         {
             foreach (var (fst, snd, thd) in listFstSndThd)
             {
@@ -164,7 +164,7 @@ namespace AOC.Common
             }
         }
 
-        public static IEnumerable<(long fst, long snd, long thd)> FRng(this IEnumerable<(long, long)> listFstSnd, long min, long max)
+        public static IEnumerable<(T1 fst, T2 snd, long thd)> FRng<T1,T2>(this IEnumerable<(T1, T2)> listFstSnd, long min, long max)
         {
             foreach (var (fst, snd) in listFstSnd)
             {
@@ -174,7 +174,7 @@ namespace AOC.Common
                 }
             }
         }
-        public static IEnumerable<(long fst, long snd, long thd, long fth)> FRng(this IEnumerable<(long, long, long)> listFstSndThd, long min, long max)
+        public static IEnumerable<(T1 fst, T2 snd, T3 thd, long fth)> FRng<T1,T2,T3>(this IEnumerable<(T1, T2, T3)> listFstSndThd, long min, long max)
         {
             foreach (var (fst, snd, thd) in listFstSndThd)
             {

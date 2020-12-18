@@ -204,6 +204,8 @@ namespace d17
                 //var res1 = coords.SelectMany(_ => _?.SelectMany(_2 => _2?.Select(_3 => _3 ? 1 : 0)?.ToArray() ?? new int[] { })?.ToArray() ?? new int[] { }).Sum();
                 var res2 = coords.SelectMany(c => c.SelectMany(cy => cy.SelectMany(cz => cz.Select(cw => cw ? 1 : 0)))).Sum();
             }
+
+            
         }
     }
 }
