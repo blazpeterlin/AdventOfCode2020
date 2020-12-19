@@ -43,6 +43,7 @@ namespace experiments
             // proste spremenljivke
             IntExpr[,] nums = new IntExpr[9, 9];
             if (sudokuInput.Count != 9) { throw new Exception(); }
+
             for (int i = 0; i < sudokuInput.Count; i++)
             {
                 var ln = sudokuInput[i];
