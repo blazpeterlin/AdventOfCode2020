@@ -69,7 +69,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Z3.LinqBinding.Demo", "Z3.L
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Z3.LinqBinding.Sudoku", "Z3.LinqBinding.Sudoku\Z3.LinqBinding.Sudoku.csproj", "{9921E34D-F22D-4627-94B9-D871EB586C14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Z3.LinqBinding.NetStandard", "Z3.LinqBinding.NetStandard\Z3.LinqBinding.NetStandard.csproj", "{170FBCB6-33EC-49A7-BAB3-096569D1579B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Z3.LinqBinding.NetStandard", "Z3.LinqBinding.NetStandard\Z3.LinqBinding.NetStandard.csproj", "{170FBCB6-33EC-49A7-BAB3-096569D1579B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "d21", "d21\d21.csproj", "{1338B6A3-38BF-4234-91EA-CA9325C6201B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -353,6 +355,18 @@ Global
 		{170FBCB6-33EC-49A7-BAB3-096569D1579B}.Release|x64.Build.0 = Release|Any CPU
 		{170FBCB6-33EC-49A7-BAB3-096569D1579B}.Release|x86.ActiveCfg = Release|Any CPU
 		{170FBCB6-33EC-49A7-BAB3-096569D1579B}.Release|x86.Build.0 = Release|Any CPU
+		{1338B6A3-38BF-4234-91EA-CA9325C6201B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1338B6A3-38BF-4234-91EA-CA9325C6201B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1338B6A3-38BF-4234-91EA-CA9325C6201B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1338B6A3-38BF-4234-91EA-CA9325C6201B}.Debug|x64.Build.0 = Debug|Any CPU
+		{1338B6A3-38BF-4234-91EA-CA9325C6201B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1338B6A3-38BF-4234-91EA-CA9325C6201B}.Debug|x86.Build.0 = Debug|Any CPU
+		{1338B6A3-38BF-4234-91EA-CA9325C6201B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1338B6A3-38BF-4234-91EA-CA9325C6201B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1338B6A3-38BF-4234-91EA-CA9325C6201B}.Release|x64.ActiveCfg = Release|Any CPU
+		{1338B6A3-38BF-4234-91EA-CA9325C6201B}.Release|x64.Build.0 = Release|Any CPU
+		{1338B6A3-38BF-4234-91EA-CA9325C6201B}.Release|x86.ActiveCfg = Release|Any CPU
+		{1338B6A3-38BF-4234-91EA-CA9325C6201B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -385,6 +399,7 @@ Global
 		{E11C21EB-3336-458F-9451-67F8E8F2352D} = {CC7FB9FB-A43B-4588-97E7-7822266D21D3}
 		{9921E34D-F22D-4627-94B9-D871EB586C14} = {CC7FB9FB-A43B-4588-97E7-7822266D21D3}
 		{170FBCB6-33EC-49A7-BAB3-096569D1579B} = {CC7FB9FB-A43B-4588-97E7-7822266D21D3}
+		{1338B6A3-38BF-4234-91EA-CA9325C6201B} = {511C17B5-F8EF-417F-9551-B6F2248012FB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {473EDB8B-5C5C-4346-B4BE-0B8FCF30D337}

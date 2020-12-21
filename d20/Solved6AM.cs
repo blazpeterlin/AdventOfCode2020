@@ -338,7 +338,10 @@ namespace d20
                         {
 
                         }
+                        else if (found == true)
+                        {
 
+                        }
                     }
                 }
 
@@ -361,8 +364,6 @@ namespace d20
                 var sm1 = "                  # ";
                 var sm2 = "#    ##    ##    ###";
                 var sm3 = " #  #  #  #  #  #   ";
-
-                //var test = Regex.Match(sm2, ".*(##).*").Cast<Match>().ToList();
 
                 var iteratedTxt = finalTxt;
                 List<string> currTxt = new List<string>();
@@ -391,8 +392,6 @@ namespace d20
                                 var ln = ftv[i].Substring(x, sm1.Length);
                                 foreach (var mc in Regex.Matches(ln, ".*(" + new string(sm1.Select(_ => _ == '#' ? "(#|O)" : ".").SelectMany(_ => _).ToArray()) + ").*").Cast<Match>())
                                 {
-                                    //var x = mc.Groups.Cast<Group>().ToList()[1].Index;
-                                    //var tpl = (ln.IndexOf(mc.Groups.Cast<Group>().ToList()[1].Value), i);
                                     var tpl = (x, i);
                                     if (!dict.ContainsKey(tpl)) { dict[tpl] = new(); }
                                     dict[tpl].Add(1);
@@ -400,9 +399,6 @@ namespace d20
 
                                 foreach (var mc in Regex.Matches(ln, ".*(" + new string(sm2.Select(_ => _ == '#' ? "(#|O)" : ".").SelectMany(_ => _).ToArray()) + ").*").Cast<Match>())
                                 {
-                                    //var tpl = (ln.IndexOf(mc.Value), i - 1);
-                                    //var x = mc.Groups.Cast<Group>().ToList()[1].Index;
-                                    //var tpl = (ln.IndexOf(mc.Groups.Cast<Group>().ToList()[1].Value), i);
                                     var tpl = (x, i - 1);
 
                                     if (!dict.ContainsKey(tpl)) { dict[tpl] = new(); }
@@ -411,9 +407,6 @@ namespace d20
 
                                 foreach (var mc in Regex.Matches(ln, ".*(" + new string(sm3.Select(_ => _ == '#' ? "(#|O)" : ".").SelectMany(_ => _).ToArray()) + ").*").Cast<Match>())
                                 {
-                                    //var tpl = (ln.IndexOf(mc.Value), i - 2);
-                                    //var x = mc.Groups.Cast<Group>().ToList()[1].Index;
-                                    //var tpl = (ln.IndexOf(mc.Groups.Cast<Group>().ToList()[1].Value), i);
                                     var tpl = (x, i - 2);
 
                                     if (!dict.ContainsKey(tpl)) { dict[tpl] = new(); }
@@ -450,17 +443,7 @@ namespace d20
 
                         totalMonsters += monsters.Count;
                     }
-
-                    //if (totalMonsters > 0)
-                    //{
-                    //    int CountHash(string ln) { return ln.Count(_ => _ == '#'); }
-                    //    var res2 = string.Join("", finalTxt).FPipe(CountHash) - totalMonsters * (CountHash(sm1) + CountHash(sm2) + CountHash(sm3));
-
-                    //    // 1852 too high
-                    //    // 1732 too low
-                    //} 
                 }
-
 
                 // 1792
                 int res2 = iteratedTxt.SelectMany(_ => _).Where(_ => _ == '#').Count();
