@@ -1119,6 +1119,7 @@ namespace Z3.LinqBinding
                             .GetMethods().First(m => m.Name == nameof(Enumerable.ToArray)))
                     {
                         var callerToArrayExp = mExp.Arguments[0];
+                        
                         if (callerToArrayExp is MethodCallExpression callerToArrayMethodExp)
                         {
                             if (callerToArrayMethodExp.Method.IsGenericMethod && callerToArrayMethodExp.Method.GetGenericMethodDefinition() == typeof(Enumerable).GetMethods().First(m => m.Name == nameof(Enumerable.Select) && m.GetParameters().Length == 2))
@@ -1137,6 +1138,11 @@ namespace Z3.LinqBinding
 
                                 distinctExps = subExps;
                             }
+                        }
+                        else
+                        {
+                            distinctExps = (IEnumerable<Expression>)ExpressionInterpreter.Instance.Interpret(callerToArrayExp);
+                            
                         }
                     }
                 }

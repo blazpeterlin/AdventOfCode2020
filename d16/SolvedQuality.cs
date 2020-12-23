@@ -119,12 +119,15 @@ namespace d16
     class Z3Model
     {
         public List<List<int>> TransposedTickets { get; set; }
+        //public List<int> MapRng2Tckt { get; set; }
         public List<int> MapRng2Tckt { get; set; }
 
         public Theorem<Z3Model> CreateRules(Theorem<Z3Model> t)
         {
+            //var distinctMapRng2Tckt = MapRng2Tckt.ToArray();
+            t.SimplifyLambdas = false;
             return t
-                .Where(m => Z3Methods.Distinct(MapRng2Tckt.ToArray()))
+                .Where(m => Z3Methods.Distinct(Enumerable.ToArray(MapRng2Tckt)))
                 //.Where(m => MapRng2Tckt.All(_ => _ >= 0 && _ < rangeNames.Count))
                 ;
         }
