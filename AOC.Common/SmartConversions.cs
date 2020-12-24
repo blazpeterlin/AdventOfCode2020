@@ -18,6 +18,13 @@ namespace AOC.Common
 
 
 
+        public static int AsInt2(string str) => int.Parse(str);
+        public static long AsLong2(string str) => long.Parse(str);
+        public static float AsFloat2(string str) => float.Parse(str);
+        public static char AsChar2(string str) => str.Single();
+        public static double AsDouble2(string str) => double.Parse(str);
+        public static string AsString2(string str) => str;
+
         //public static D NameTokens<D, T1>(this IEnumerable<string> tkns, D d)
         //{
         //    dynamic res = new ExpandoObject();

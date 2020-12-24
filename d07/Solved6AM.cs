@@ -47,7 +47,7 @@ namespace d07
                 for (long i = 2; i < tkns.Count; i+=3)
                 {
                     string typ = tkns[(int)i + 1] + " " + tkns[(int)i + 2];
-                    dsts.Add((AsLong(tkns[(int)i]), typ));
+                    dsts.Add(((tkns[(int)i]).AsLong(), typ));
                     if (!dictContains.ContainsKey(typ)) { dictContains[typ] = new List<string>(); }
                     dictContains[typ].Add(src);
                 }

@@ -29,7 +29,7 @@ namespace d02
 
             var res1nicer = txt
                 .Select(ln => ln.FSplit("-", " ", ":"))
-                .Select(tkns => tkns.Tuplify(AsInt, AsInt, AsChar, AsString))
+                .Select(tkns => tkns.Tuplify(AsInt2, AsInt2, AsChar2, AsString2))
                 .Where(t => t.t4.Count(ch => ch == t.t3) >= t.t1 && t.t4.Count(ch => ch == t.t3) <= t.t2)
                 .Count();
         }
